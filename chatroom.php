@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ChatBox</title>
+    <title>ePower</title>
     <link rel="stylesheet" type="text/css" href="maini.css">
 </head>
-
 <body>
     <section></section>
-    <div id="mySidenav" class="sidenav">
+    <nav id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a href="#">Home</a>
       <a href="#">Measure</a>
       <a href="#">Leaderboard</a>
       <a href="#">Social</a>
       <a href="#">Profile</a>
-    </div>
+    </nav>
 
     <div id="main">
       <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
@@ -34,7 +33,7 @@
     }
     </script>
 
-    </body>
+    <!--/body-->
 
 <?php
 session_start();
@@ -110,7 +109,7 @@ header('location: practice.php?logout_successfully=<span style="color:green">You
 	}
 
 ?>
-<form action="">
+<form action="chatroom.php">
 <input type="submit" name="logout" value="logout">
 </form>
 <div id="chatbox">
@@ -126,7 +125,7 @@ header('location: practice.php?logout_successfully=<span style="color:green">You
 <textarea rows="4" cols="100" id="text"></textarea>
 <input type="button" value="send"  onclick="getText()" />
 </form>
-</div></center>
+</div>
 
 </div>
 
@@ -138,5 +137,6 @@ header('location: practice.php?logout_successfully=<span style="color:green">You
 
  ?>
 
+    </body>
  </html>
 

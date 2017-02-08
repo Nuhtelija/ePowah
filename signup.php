@@ -2,10 +2,9 @@
 <html>
 
 <head>
+   <title>ePower</title>
     <link rel="stylesheet" href="styles.css">
-</head>
-
-<script>
+    <script>
 function getcity(id) {
 			xhr = new XMLHttpRequest();
 			xhr.open('GET' , 'test.php?idd='+id, true);
@@ -52,19 +51,18 @@ function getEmail(emailid){
 		}
 
 </script>
-
-
+</head>
 <body>
     <form method="post" action="insert.php">
     <div class="login">
         <h1>ePower</h1>
-        <form method="post">
+
            <input type="text" name="name" placeholder="Name" required="required" />
             <input type="email" name="email" placeholder="Email" onBlur="getEmail(this.value)" />
             <input type="password" name="pass1" placeholder="Password" required="required" />
               <input type="password" name="pass2" placeholder="Repeat password" required="required" />
             <button type="submit" class="btn btn-primary btn-block btn-large sbt">Sign Up</button>
-        </form>
+
     </div>
     </form>
 </body>
