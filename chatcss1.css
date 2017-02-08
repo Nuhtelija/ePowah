@@ -1,0 +1,32 @@
+#chatbox {
+    border: double;
+    height: 500px;
+    width: 1000px;
+    align;
+}
+
+#chatarea {
+    width: 750px;
+    height: 400px;
+    border: double;
+    float: left;
+    overflow: auto;
+}
+
+#loginperson {
+    width: 238px;
+    height: 497px;
+    border: double;
+    float: right;
+}
+
+#textbox {
+    width: 750px;
+    height: 89px;
+    border: double;
+    float: left;
+}
+
+#chatting {
+    float: left;
+}
