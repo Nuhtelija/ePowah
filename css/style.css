@@ -1,0 +1,130 @@
+/*Top Container*/
+
+.topcontainer {
+    color: #fff!important;
+    background-color: #000000!important;
+    padding: 8px 16px!important;
+    font-size: 18px!important;
+    font-family: "Raleway", sans-serif;
+    line-height: 1.5;
+    text-align: right;
+}
+
+body {
+    font-family: 'Myriad Pro', 'Trebuchet MS', sans-serif;
+    /*background: #fff;*/
+    background: url("../img/wbackground.jpg");
+   
+}
+
+.alert {
+    color: #fff!important;
+    background-color: #ff0000!important;
+    padding: 8px 16px!important;
+    font-size: 18px!important;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.login {
+  width: 340px;
+  background-color: #1ea167;
+  border-radius: 5px;
+  padding: 20px;
+  background-image: -webkit-linear-gradient(90deg, #f4f4f4, #f1f1f1);
+  margin: auto;
+  position: absolute;
+   left: 0;  right: 0;
+    top: 30%;
+    
+ 
+
+  box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2) inset, 0px 0px 2px rgba(0, 0, 0, 0.5);
+}
+.login h2 {
+  color: #000000;
+  font-size: 20px;
+  margin: 0 0 15px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+
+}
+.login fieldset {
+  border: 0;
+  padding: 0;
+  margin-bottom: 10px;
+}
+.login fieldset input {
+  outline: none;
+  width: 300px;
+  height: 12px;
+  display: block;
+  background: #f1f1f1;
+  border: 1px solid #dddddd;
+  margin: 0;
+  padding: 13px 15px;
+  font-size: 13px;
+}
+.login fieldset input:focus, .login fieldset input:active {
+  background-color:  #f1f1f1;
+}
+.login fieldset input:nth-child(1) {
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) inset;
+}
+.login fieldset input:last-child {
+  position: relative;
+  top: -1px;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.login fieldset ::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+.login button[type="submit"] {
+  margin: 0;
+  display: block;
+  padding: 13px 0;
+  width: 335px;
+  font-size: 13px;
+  font-weight: bold;
+  border: 0;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 1);
+  background-color: #f6ba35;
+  background-image: -webkit-linear-gradient(90deg, #eca418, #ffcd4e);
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+.login .utilities {
+  margin-top: 20px;
+}
+.login .utilities a {
+  color: #1784db;
+  text-decoration: none;
+  font-size: 12px;
+  /*text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.4);*/
+}
+.login .utilities a:hover {
+  color: #000000;
+}
+.login .utilities a:nth-child(2) {
+  display: block;
+  float: right;
+  width: 50%;
+  text-align: right;
+}
+
+
+@media screen and (max-width: 450px) {
+    
+    .login {
+       width: 280px;       
+}
+    .login fieldset input {
+  width: 240px;
+    
+}
+    .login button[type="submit"] {
+    width: 275px;
+    }
+}
