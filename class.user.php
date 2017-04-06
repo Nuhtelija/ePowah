@@ -45,6 +45,26 @@ class USER
 			echo $ex->getMessage();
 		}
 	}
+    
+    // Updates profile from profile page
+    public function update($uname,$email,$upass,$uid)
+	{
+		try
+		{							
+			$password = md5($upass);
+			//$stmt = $this->conn->prepare("UPDATE tbl_users SET(userName = :user_name, userEmail = :user_mail, userPass = :user_pass");
+            $stmt = $this->conn->prepare("UPDATE tbl_users SET userName = '$uname' WHERE userID=44");
+			$stmt->bindparam(":user_name",$uname);
+			$stmt->bindparam(":user_mail",$email);
+			$stmt->bindparam(":user_pass",$password);
+			$stmt->execute();	
+			return $stmt;
+		}
+		catch(PDOException $ex)
+		{
+			echo $ex->getMessage();
+		}
+	}
 	
 	public function login($email,$upass)
 	{
@@ -88,6 +108,8 @@ class USER
 			echo $ex->getMessage();
 		}
 	}
+    
+    
 	
 	
 	public function is_logged_in()

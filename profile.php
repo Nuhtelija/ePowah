@@ -23,10 +23,62 @@ $imgUrl = 'http://www.gravatar.com/avatar/'.md5($userMail).'fs='.$imageWidth;
 
 ?>
 
+<?php
+
+if(isset($_POST['btn-reset-pass']))
+{
+	$uname = trim($_POST['txtuname']);
+	$email = trim($_POST['txtemail']);
+	$upass = trim($_POST['txtpass']);
+    $uid = trim($_POST['userSession']);
+	$code = md5(uniqid(rand()));
+	
+	$stmt = $user_home->runQuery("SELECT * FROM tbl_users WHERE userEmail=:email_id");
+	$stmt->execute(array(":email_id"=>$email));
+	$row = $stmt->fetch(PDO::FETCH_ASSOC);
+	
+	if($stmt->rowCount() > 0)
+	{
+		$msg = "
+		      <div class='alert'>
+				
+					<strong>Sorry !</strong>  Email allready exists, please try another one.
+			  </div>
+			  ";
+	}
+	else
+	{
+        $pass = $_POST['txtpass'];
+			$cpass = $_POST['confirm-pass'];
+			
+			if($cpass!==$pass)
+			{
+				$msg = "<div class='alert'>
+						
+						<strong>Sorry!</strong>  Password doesn't match. 
+						</div>";
+            } else {
+		if($user_home->update($uname,$email,$upass,$uid))
+		{					
+			$msg = "
+					<div class='alert'>
+						<strong>Success!</strong>
+			  		</div>
+					";
+		}
+		else
+		{
+			echo "sorry , Query could no execute...";
+		}	
+	}
+}
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>ePower</title>
+<title>ePower | Profile</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
@@ -97,20 +149,10 @@ function submit() {
         <div class="login">
   <h2><?php echo $row['userName']; ?> - Profile</h2>
   <fieldset>
-<!--  <?php echo $row['userName']; ?>
-  <?php echo $row['userEmail']; ?>
-  <p>Name:</p>
-   <input type="text" class="input-block-level" placeholder="Name" name="txtuname" required />
-       <p>Email:</p>
-        <input type="email" class="input-block-level" placeholder="Email" name="txtemail" required />
-        <p>Change password:</p>
-    <input type="password" class="input-block-level" placeholder="New Password" name="pass" required />
-        <input type="password" class="input-block-level" placeholder="Confirm New Password" name="confirm-pass" required />-->
-        Name: <input type="text" id="txtuname" placeholder="Name" required />
-        Email: <input type="email" id="txtemail" placeholder="Email" required />
-        New Password: <input type="password" id="pass" placeholder="New Password" required />
-        Confirm New Password: <input type="password" id="pass" placeholder="Confirm New Password" required />
-  
+        Name: <input type="text" name="txtuname" placeholder="Name" required />
+        Email: <input type="email" name="txtemail" placeholder="Email" required />
+        New Password: <input type="password" name="txtpass" placeholder="New Password" required />
+        Confirm New Password: <input type="password" name="confirm-pass" placeholder="Confirm New Password" required />
   </fieldset>
   <button class="btn btn-large btn-primary" type="submit" name="btn-reset-pass">Save changes</button>
  

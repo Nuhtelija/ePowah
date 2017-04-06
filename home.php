@@ -25,7 +25,7 @@ $imgUrl = 'http://www.gravatar.com/avatar/'.md5($userMail).'fs='.$imageWidth;
 
 <!DOCTYPE html>
 <html>
-<title>ePower</title>
+<title>ePower | Home</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
