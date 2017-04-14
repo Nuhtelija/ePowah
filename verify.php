@@ -28,7 +28,7 @@ if(isset($_GET['id']) && isset($_GET['code']))
 			$stmt->execute();	
 			
 			$msg = "
-		           <div class='alert'>
+		           <div class='alert2'>
 				    Your account is now activated : <a href='index.php'>Login here</a>
 			       </div>
 			       ";	

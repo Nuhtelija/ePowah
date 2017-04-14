@@ -1,5 +1,6 @@
 <?php
 $title = "Results";
+$highhome = "w3-blue";
 session_start();
 require_once 'nav.php';
 ?>
@@ -10,7 +11,7 @@ require_once 'nav.php';
   </header>
       
 
-  <div class="w3-row-padding w3-margin-bottom">
+  <!--<div class="w3-row-padding w3-margin-bottom">
     <div class="w3-quarter">
       <div class="w3-container w3-red w3-padding-16">
         <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
@@ -56,9 +57,9 @@ require_once 'nav.php';
   <div class="w3-panel">
     <div class="w3-row-padding" style="margin:0 -16px">
     </div>
-  </div>
+  </div>-->
   
-  <div class="w3-container">
+  <!--<div class="w3-container">
     <h5>General Stats</h5>
     <p>Progress</p>
     <div class="w3-grey">
@@ -75,9 +76,9 @@ require_once 'nav.php';
       <div class="w3-container w3-center w3-padding w3-red" style="width:75%">75%</div>
     </div>
   </div>
-  <hr>
+  <hr>-->
 
-  <div class="w3-container">
+<!--  <div class="w3-container">
     <h5>Recent Comments</h5>
     <div class="w3-row">
       <div class="w3-col m2 text-center">
@@ -99,4 +100,6 @@ require_once 'nav.php';
       </div>
     </div>
   </div>
-  <br>
+  <br>-->
+ 
+

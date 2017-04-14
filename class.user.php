@@ -47,16 +47,13 @@ class USER
 	}
     
     // Updates profile from profile page
-    public function update($uname,$email,$upass,$uid)
+    public function update($uname,$email,$upass,$id)
 	{
 		try
 		{							
 			$password = md5($upass);
 			//$stmt = $this->conn->prepare("UPDATE tbl_users SET(userName = :user_name, userEmail = :user_mail, userPass = :user_pass");
-            $stmt = $this->conn->prepare("UPDATE tbl_users SET userName = '$uname' WHERE userID=44");
-			$stmt->bindparam(":user_name",$uname);
-			$stmt->bindparam(":user_mail",$email);
-			$stmt->bindparam(":user_pass",$password);
+            $stmt = $this->conn->prepare("UPDATE tbl_users SET userName = '$uname', userEmail = '$email', userPass = '$password' WHERE userID = '$id'");
 			$stmt->execute();	
 			return $stmt;
 		}

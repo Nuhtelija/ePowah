@@ -34,7 +34,7 @@ $imgUrl = 'http://www.gravatar.com/avatar/'.md5($userMail).'fs='.$imageWidth;
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
-<body class="w3-light-grey">
+<body  onload="submit()" class="w3-light-grey">
 
 <!-- Top container -->
 <div class="w3-container w3-top w3-black w3-large w3-padding" style="z-index:4">
@@ -59,10 +59,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="home.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-home"></i>  Home</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-area-chart"></i>  Results</a>
-    <a href="social.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-weixin"></i>  Social</a>
-    <a href="" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Settings</a>
+    <a href="home.php" class="w3-bar-item w3-button w3-padding <?php echo $highhome; ?>"><i class="fa fa-home"></i>  Home</a>
+    <a href="results.php" class="w3-bar-item w3-button w3-padding <?php echo $highresults; ?>"><i class="fa fa-area-chart"></i>  Results</a>
+    <a href="social.php" class="w3-bar-item w3-button w3-padding <?php echo $highsocial; ?>"><i class="fa fa-weixin"></i>  Social</a>
+    <a href="profile.php" class="w3-bar-item w3-button w3-padding <?php echo $highprofile; ?>"><i class="fa fa-user"></i>  Profile</a>
     <a href="logout.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out"></i>  Logout</a><br><br>
   </div>
 </nav>
@@ -73,7 +73,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
-  </div>
+ 
 
   <!-- Header -->
 

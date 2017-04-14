@@ -23,25 +23,36 @@ if(isset($_GET['id']) && isset($_GET['code']))
 			$pass = $_POST['pass'];
 			$cpass = $_POST['confirm-pass'];
 			
-			if($cpass!==$pass)
-			{
-				$msg = "<div class='alert'>
-						
+			if($cpass!==$pass) {
+                $msg = "<div class='alert'>
 						<strong>Sorry!</strong>  Password doesn't match. 
 						</div>";
-			}
-			else
-			{
+                } else {
+                    if (strlen($pass) < 6) {
+                        $msg = "<div class='alert'> <strong>Sorry!</strong>  Password too short! 
+						</div>";
+                    }  else {
+                        if (!preg_match("#[0-9]+#", $pass)) {
+                            $msg = "<div class='alert'>
+						          <strong>Sorry!</strong>  Password must include at least one number! </div>";
+                        } else {
+                            if (!preg_match("#[a-zA-Z]+#", $pass)) {
+                                $msg = "<div class='alert'>
+						              <strong>Sorry!</strong>  Password must include at least one letter! </div>";
+                            } else {
 				$password = md5($cpass);
 				$stmt = $user->runQuery("UPDATE tbl_users SET userPass=:upass WHERE userID=:uid");
 				$stmt->execute(array(":upass"=>$password,":uid"=>$rows['userID']));
 				
-				$msg = "<div class='alert'>
+				$msg = "<div class='alert2'>
 
 						Password Changed.
 						</div>";
 				header("refresh:5;index.php");
 			}
+                        }
+                    }
+            }
 		}	
 	}
 	else

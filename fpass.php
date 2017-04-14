@@ -37,11 +37,12 @@ if(isset($_POST['btn-submit']))
 		
 		$user->send_mail($email,$message,$subject);
 		
-		$msg = "<div class='alert'>
+		$msg = "<div class='alert2'>
 				
 					We've sent an email to $email.
                     Please click on the reset link in the email to generate new password. 
 			  	</div>";
+        // header( "refresh:10;url=index.php" );
 	}
 	else
 	{

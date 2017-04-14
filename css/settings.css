@@ -3,7 +3,6 @@
 
 
 body {
-    font-family: 'Myriad Pro', 'Trebuchet MS', sans-serif;
     background: #f1f1f1;
    
 }
@@ -18,14 +17,15 @@ body {
 }
 
 .login {
-  width: 500px;
+  width: 380px;
   border-radius: 5px;
   padding: 20px;
   background: #ffffff;
   margin: auto;
   position: absolute;
-   left: 0;  right: 0;
+   left: 200px;  right: 0;
     top: 30%;
+   
     
  
 
@@ -95,17 +95,23 @@ body {
   text-align: right;
 }
 
+@media screen and (max-width: 1000px) {
+    
+    .login {
+        left: 0px;  right: 0;
+}
+
 
 @media screen and (max-width: 450px) {
     
     .login {
-       width: 280px;       
+       width: 280px; 
 }
     .login fieldset input {
   width: 240px;
     
 }
     .login button[type="submit"] {
-    width: 275px;
+    width: 240px;
     }
 }

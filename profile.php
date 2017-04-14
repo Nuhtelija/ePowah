@@ -1,27 +1,19 @@
 <?php
+$title = "Profile";
+$highprofile = "w3-blue";
 session_start();
-require_once 'class.user.php';
-$user_home = new USER();
-
-if(!$user_home->is_logged_in())
-{
-	$user_home->redirect('index.php');
-}
-
-$stmt = $user_home->runQuery("SELECT * FROM tbl_users WHERE userID=:uid");
-$stmt->execute(array(":uid"=>$_SESSION['userSession']));
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
+require_once 'nav.php';
 ?>
 
-<?php
-$userMail = $_SESSION['email'];
-
-$imageWidth = '150'; //The image size
-
-$imgUrl = 'http://www.gravatar.com/avatar/'.md5($userMail).'fs='.$imageWidth;
-
-?>
+<script type="text/javascript">
+    function submit()
+    {
+        // alert("I am an alert box!");
+         document.getElementById("txtuname").value = "<?php echo $row['userName']; ?>";
+    document.getElementById("txtemail").value = "<?php echo $row['userEmail']; ?>";
+     
+    }
+</script>
 
 <?php
 
@@ -30,38 +22,45 @@ if(isset($_POST['btn-reset-pass']))
 	$uname = trim($_POST['txtuname']);
 	$email = trim($_POST['txtemail']);
 	$upass = trim($_POST['txtpass']);
-    $uid = trim($_POST['userSession']);
+    $id = $_SESSION['userSession'];
+    //$uid = trim($_POST['userSession']);
 	$code = md5(uniqid(rand()));
 	
 	$stmt = $user_home->runQuery("SELECT * FROM tbl_users WHERE userEmail=:email_id");
 	$stmt->execute(array(":email_id"=>$email));
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	
-	if($stmt->rowCount() > 0)
-	{
-		$msg = "
-		      <div class='alert'>
-				
-					<strong>Sorry !</strong>  Email allready exists, please try another one.
-			  </div>
-			  ";
-	}
-	else
-	{
-        $pass = $_POST['txtpass'];
+	if($stmt->rowCount() > 0 ) {
+        $msg = "
+        <div class='alert'>
+        <strong>Sorry !</strong>  Email allready exists, please try another one.
+        </div>";
+        
+	   } else {
+            $pass = $_POST['txtpass'];
 			$cpass = $_POST['confirm-pass'];
 			
-			if($cpass!==$pass)
-			{
-				$msg = "<div class='alert'>
-						
+			if($cpass!==$pass) {
+                $msg = "<div class='alert'>
 						<strong>Sorry!</strong>  Password doesn't match. 
 						</div>";
-            } else {
-		if($user_home->update($uname,$email,$upass,$uid))
+                } else {
+                    if (strlen($pass) < 6) {
+                        $msg = "<div class='alert'> <strong>Sorry!</strong>  Password too short! 
+						</div>";
+                    }  else {
+                        if (!preg_match("#[0-9]+#", $pass)) {
+                            $msg = "<div class='alert'>
+						          <strong>Sorry!</strong>  Password must include at least one number! </div>";
+                        } else {
+                            if (!preg_match("#[a-zA-Z]+#", $pass)) {
+                                $msg = "<div class='alert'>
+						              <strong>Sorry!</strong>  Password must include at least one letter! </div>";
+                            } else {
+		if($user_home->update($uname,$email,$upass,$id))
 		{					
 			$msg = "
-					<div class='alert'>
+					<div class='alert2'>
 						<strong>Success!</strong>
 			  		</div>
 					";
@@ -73,70 +72,12 @@ if(isset($_POST['btn-reset-pass']))
 	}
 }
 }
+            }
+    }
+}
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>ePower | Profile</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link href="css/settings.css" rel="stylesheet" media="screen">
-<style>
-html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-</style>
-<script>
-function submit() {
-    document.getElementById("txtuname").value = "<?php echo $row['userName']; ?>";
-    document.getElementById("txtemail").value = "<?php echo $row['userEmail']; ?>";
-}
-</script>
-</head>
-<body onload="submit()" class="w3-light-grey">
-
-<!-- Top container -->
-<div class="w3-container w3-top w3-black w3-large w3-padding" style="z-index:4">
-  <button class="w3-button w3-hide-large w3-padding-0 w3-black w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-  <span class="w3-right">ePower</span>
-</div>
-
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-collapse w3-white" style="z-index:3;width:300px;" id="mySidebar"><br>
-  <div class="w3-container w3-row">
-    <div class="w3-col s4">
-      <img src="<?php echo $imgUrl;?>" class="w3-circle w3-margin-right" style="width:70px">
-    </div>
-    <div class="w3-col s8 w3-bar">
-      <span>Welcome, <strong><?php echo $row['userName']; ?></strong></span><br>
-     
-    </div>
-  </div>
-  <hr>
-  <div class="w3-container">
-    <h5>Dashboard</h5>
-  </div>
-  <div class="w3-bar-block">
-    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="home.php" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-home"></i>  Home</a>
-    <a href="results.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-area-chart"></i>  Results</a>
-    <a href="social.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-weixin"></i>  Social</a>
-    <a href="profile.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user"></i>  Profile</a>
-    <a href="logout.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out"></i>  Logout</a><br><br>
-  </div>
-</nav>
-
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:300px;margin-top:43px;">
-</div>
-   
     <div class="container">
         <form class="form-signin" method="post">
         <?php
@@ -149,8 +90,8 @@ function submit() {
         <div class="login">
   <h2><?php echo $row['userName']; ?> - Profile</h2>
   <fieldset>
-        Name: <input type="text" name="txtuname" placeholder="Name" required />
-        Email: <input type="email" name="txtemail" placeholder="Email" required />
+        Name: <input type="text" name="txtuname" id="txtuname" placeholder="Name" required />
+        Email: <input type="email" name="txtemail" id="txtemail" placeholder="Email" required />
         New Password: <input type="password" name="txtpass" placeholder="New Password" required />
         Confirm New Password: <input type="password" name="confirm-pass" placeholder="Confirm New Password" required />
   </fieldset>
@@ -162,33 +103,4 @@ function submit() {
 
     </div> 
 
-  <!-- End page content -->
 
-
-<script>
-// Get the Sidebar
-var mySidebar = document.getElementById("mySidebar");
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-    if (mySidebar.style.display === 'block') {
-        mySidebar.style.display = 'none';
-        overlayBg.style.display = "none";
-    } else {
-        mySidebar.style.display = 'block';
-        overlayBg.style.display = "block";
-    }
-}
-
-// Close the sidebar with the close button
-function w3_close() {
-    mySidebar.style.display = "none";
-    overlayBg.style.display = "none";
-}
-</script>
-
-</body>
-</html>

@@ -9,7 +9,6 @@ if($reg_user->is_logged_in()!="")
 	$reg_user->redirect('home.php');
 }
 
-
 if(isset($_POST['btn-signup']))
 {
 	$uname = trim($_POST['txtuname']);
@@ -21,58 +20,62 @@ if(isset($_POST['btn-signup']))
 	$stmt->execute(array(":email_id"=>$email));
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	
-	if($stmt->rowCount() > 0)
-	{
-		$msg = "
-		      <div class='alert'>
-				
-					<strong>Sorry !</strong>  Email allready exists, please try another one.
-			  </div>
-			  ";
-	}
-	else
-	{
-        $pass = $_POST['txtpass'];
+	if($stmt->rowCount() > 0) {
+        $msg = "
+        <div class='alert'>
+        <strong>Sorry !</strong>  Email allready exists, please try another one.
+        </div>";
+        
+	   } else {
+            $pass = $_POST['txtpass'];
 			$cpass = $_POST['confirm-pass'];
 			
-			if($cpass!==$pass)
-			{
-				$msg = "<div class='alert'>
-						
+			if($cpass!==$pass) {
+                $msg = "<div class='alert'>
 						<strong>Sorry!</strong>  Password doesn't match. 
 						</div>";
-            } else {
-		if($reg_user->register($uname,$email,$upass,$code))
-		{			
-			$id = $reg_user->lasdID();		
-			$key = base64_encode($id);
-			$id = $key;
+                } else {
+                    if (strlen($pass) < 6) {
+                        $msg = "<div class='alert'> <strong>Sorry!</strong>  Password too short! 
+						</div>";
+                    }  else {
+                        if (!preg_match("#[0-9]+#", $pass)) {
+                            $msg = "<div class='alert'>
+						          <strong>Sorry!</strong>  Password must include at least one number! </div>";
+                        } else {
+                            if (!preg_match("#[a-zA-Z]+#", $pass)) {
+                                $msg = "<div class='alert'>
+						              <strong>Sorry!</strong>  Password must include at least one letter! </div>";
+                            } else {
+		                          if($reg_user->register($uname,$email,$upass,$code)) {			
+                                    $id = $reg_user->lasdID();		
+                                    $key = base64_encode($id);
+                                    $id = $key;
 			
-			$message = "					
-						Hello $uname,
-						<br /><br />
-						Welcome to ePower!<br /><br />
-						To complete your registration click following link.<br/>
-						<br /><br />
-						<a href='http://users.metropolia.fi/~juskam/epower/verify.php?id=$id&code=$code'>Click here to activate</a>
-						<br /><br />";
+                                    $message = "					
+                                                Hello $uname,
+                                                <br /><br />
+                                                Welcome to ePower!<br /><br />
+                                                To complete your registration click following link.<br/>
+                                                <br /><br />
+                                                <a href='http://users.metropolia.fi/~juskam/epower/verify.php?id=$id&code=$code'>Click here to activate</a>
+                                                <br /><br />";
 						
-			$subject = "Confirm Registration";
-						
-			$reg_user->send_mail($email,$message,$subject);	
-			$msg = "
-					<div class='alert'>
-						<strong>Success!</strong>  We've sent an email to $email.
-                    Please click on the confirmation link in the email to create your account. 
-			  		</div>
-					";
-		}
-		else
-		{
-			echo "sorry , Query could no execute...";
-		}	
-	}
-}
+                                                $subject = "Confirm Registration";
+
+                                                $reg_user->send_mail($email,$message,$subject);	
+                                                $msg = "<div class='alert2'>
+                                                        <strong>Success!</strong>  We've sent an email to $email.
+                                                        Please click on the confirmation link in the email to create your account. </div>";
+                                                // header( "refresh:10;url=index.php" );
+		                              } else {
+			                             echo "sorry , Query could no execute...";
+                        }	
+                    }
+                }
+            }
+        }
+    }
 }
 ?>
 
