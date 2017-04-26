@@ -23,10 +23,9 @@ if(isset($_POST['btn-reset-pass']))
 	$email = trim($_POST['txtemail']);
 	$upass = trim($_POST['txtpass']);
     $id = $_SESSION['userSession'];
-    //$uid = trim($_POST['userSession']);
 	$code = md5(uniqid(rand()));
 	
-	$stmt = $user_home->runQuery("SELECT * FROM tbl_users WHERE userEmail=:email_id");
+	$stmt = $user_home->runQuery("SELECT * FROM tbl_users WHERE userEmail=:email_id AND userID != $id");
 	$stmt->execute(array(":email_id"=>$email));
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	
@@ -61,7 +60,7 @@ if(isset($_POST['btn-reset-pass']))
 		{					
 			$msg = "
 					<div class='alert2'>
-						<strong>Success!</strong>
+						<strong>Details updated successfully!</strong>
 			  		</div>
 					";
 		}
@@ -92,8 +91,8 @@ if(isset($_POST['btn-reset-pass']))
   <fieldset>
         Name: <input type="text" name="txtuname" id="txtuname" placeholder="Name" required />
         Email: <input type="email" name="txtemail" id="txtemail" placeholder="Email" required />
-        New Password: <input type="password" name="txtpass" placeholder="New Password" required />
-        Confirm New Password: <input type="password" name="confirm-pass" placeholder="Confirm New Password" required />
+        New Password: <input type="password" name="txtpass" placeholder="New Password" />
+        Confirm New Password: <input type="password" name="confirm-pass" placeholder="Confirm New Password"  />
   </fieldset>
   <button class="btn btn-large btn-primary" type="submit" name="btn-reset-pass">Save changes</button>
  

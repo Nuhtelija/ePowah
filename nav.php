@@ -61,7 +61,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
     <a href="home.php" class="w3-bar-item w3-button w3-padding <?php echo $highhome; ?>"><i class="fa fa-home"></i>  Home</a>
     <a href="results.php" class="w3-bar-item w3-button w3-padding <?php echo $highresults; ?>"><i class="fa fa-area-chart"></i>  Results</a>
-    <a href="social.php" class="w3-bar-item w3-button w3-padding <?php echo $highsocial; ?>"><i class="fa fa-weixin"></i>  Social</a>
+    <a href="social.php" class="w3-bar-item w3-button w3-padding <?php echo $highsocial; ?>"><i class="fa fa-weixin"></i>  Chat</a>
     <a href="profile.php" class="w3-bar-item w3-button w3-padding <?php echo $highprofile; ?>"><i class="fa fa-user"></i>  Profile</a>
     <a href="logout.php" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out"></i>  Logout</a><br><br>
   </div>

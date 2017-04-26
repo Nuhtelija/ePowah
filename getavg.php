@@ -10,11 +10,12 @@ mysqli_select_db($con,"ajax_demo");
 $sql="SELECT * FROM measure WHERE measureID = '".$q."'";
 $result = mysqli_query($con,$sql);
 
-echo "[";
 while($row = mysqli_fetch_array($result)) {
-    echo $row['value'];
+    $values[] .= $row["value"];
 }
-echo "]";
+$avg = array_sum($values) / count($values);
+echo $avg . " μV";  
+
 
 
 mysqli_close($con);

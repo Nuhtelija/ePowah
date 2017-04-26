@@ -35,7 +35,7 @@
 
 
 #chatLineHolder{
-	height:360px;
+	height:450px;
 	width:350px;
 	margin-bottom:20px;
 }
@@ -100,7 +100,7 @@
 #chatUsers{
 	background-color:#FFFFFF;
 	border:1px solid #888;
-	height:360px;
+	height:460px;
 	position:absolute;
 	right:0;
 	top:56px;

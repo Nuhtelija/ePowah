@@ -16,6 +16,15 @@ body {
     text-align: center;
 }
 
+.alert2 {
+    color: #fff!important;
+    background-color: #00e234!important;
+    padding: 8px 16px!important;
+    font-size: 18px!important;
+    line-height: 1.5;
+    text-align: center;
+}
+
 .login {
   width: 380px;
   border-radius: 5px;

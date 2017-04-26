@@ -281,7 +281,7 @@ h4,
 h5,
 h6 {
     font-weight: 400;
-    margin: 10px 0
+    margin: 5px 0
 }
 
 .w3-wide {
@@ -573,6 +573,12 @@ ul.w3-ul li:last-child {
 
 .w3-navbar .w3-opennav.w3-right {
     float: right!important
+}
+
+.w3-size {
+    font-family: "Raleway", sans-serif;
+        
+        font-size: 32.5px; 
 }
 
 .w3-topnav {
